@@ -1,0 +1,110 @@
+header {
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  color: white;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background-color: #0d1117;
+  height: 100vh;
+}
+
+#box {
+  display: flex;
+  flex-direction: column;
+  margin: 0% 35% 0% 35%;
+  height: 50vh;
+}
+
+#content {
+  background-color: rgb(248, 248, 248);
+  width: 100%;
+  min-height: 200px;
+  height: auto;
+  border-radius: 5px;
+}
+
+#task-field {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+
+#task {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px; /* rounded left side */
+  outline: none;
+  font-size: 16px;
+  width: 100%; /* adjust as needed */
+  transition: border 0.2s;
+}
+
+#task:focus {
+  border-color: #007bff; /* highlight when focused */
+}
+
+#task-list {
+  font-size: large;
+  font-weight: 500;
+}
+
+#add-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px; /* rounded right side */
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.edit-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
+
+.edit-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+  transform: scale(1.05);   /* slight zoom effect */
+}
+
+.edit-button:active {
+  transform: scale(0.95);   /* shrink on click */
+}
+
+.delete-button {
+    margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.25s, transform 0.15s;
+}
+
+.delete-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+  transform: scale(1.05);   /* slight zoom effect */
+}
+
+.delete-button:active {
+  transform: scale(0.95);   /* shrink on click */
+}
+
+#add-button:hover {
+  background-color: #0056b3; /* darker blue on hover */
+}

@@ -4,36 +4,55 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To-Do</title>
+    <link rel="stylesheet" href="toDoStyle.css" />
   </head>
   <body>
-    <h1>To-Do List</h1>
-    <ol id="list"></ol>
-    <input type="text" name="content" id="content" />
-    <button id="add-button">Add</button>
+    <header><h1>To-Do</h1></header>
+    <div id="box">
+      <div id="task-field">
+        <input type="text" name="task" id="task" />
+        <button id="add-button" onclick="add()">Add</button>
+      </div>
+      <div style="align-items: start">
+        <h3 style="color: white; padding-left: 5px">YOUR TASKS:</h3>
+      </div>
 
-    <h2><span id="asy">1</span>. hello</h2>
+      <div id="content">
+        <ul id="task-list"></ul>
+      </div>
+    </div>
+
     <script>
-      let a = document.querySelector("#asy");
-      let counter = 0;
-      setInterval(() => {
-        a.textContent = counter;
-        counter++;
-      }, 1000);
-
-      document.getElementById("add-button").onclick = () => {
+      function add() {
+        let val = document.getElementById("task").value;
         let li = document.createElement("li");
-        let cont = document.getElementById("content").value;
-        li.textContent = cont;
-        let editBtn = document.createElement("button");
-        editBtn.textContent = "Edit";
-        editBtn.onclick = () => {
-          let newText = prompt("Edit value:");
-          li.firstChild.textContent = newText;
-          cont = newText;
-        };
-        li.appendChild(editBtn);
-        document.getElementById("list").appendChild(li);
-      };
+        li.textContent = val.toUpperCase()+" ";
+        
+        //Edit Button
+        let editBtn=document.createElement("button")
+        editBtn.setAttribute("class","edit-button")
+        editBtn.textContent="Edit"
+
+        editBtn.onclick=()=>{
+          let newText=prompt("Edit value:", val)
+          li.firstChild.textContent=newText.toUpperCase()+" ";
+          val=newText;
+        }
+        li.appendChild(editBtn)
+
+        //Delete Button
+        let dltBtn=document.createElement("button")
+        dltBtn.className="delete-button";
+        dltBtn.textContent="Delete";
+        dltBtn.onclick=()=>{
+          li.remove()
+        }
+        li.appendChild(dltBtn)
+
+
+        document.getElementById("task-list").appendChild(li);
+        document.getElementById("task").value = "";
+      }
     </script>
   </body>
 </html>
