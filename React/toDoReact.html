@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do React</title>
+  </head>
+  <body>
+    <input type="text" name="task" id="task" placeholder="Your task...." />
+    <button id="add-task" onclick="addTodo()">Add</button>
+    <ul id="task-list"></ul>
+
+    <div id="content"></div>
+
+    <script>
+      let todos = [];
+      function addTodo() {
+        todos.push({
+          title: document.querySelector("#task").value,
+        });
+        document.querySelector("#task").value = "";
+        render();
+      }
+
+      function createToDoComponent(todo, index) {
+        let li = document.createElement("li");
+        li.textContent = todo;
+
+        let editBtn = document.createElement("button");
+        editBtn.setAttribute("class", "edit-button");
+        editBtn.setAttribute("onclick", "edit()");
+        editBtn.textContent = "Edit";
+        editBtn.onclick = () => {
+          const newText = prompt("Enter new text:", todo);
+          li.textContent = newText;
+          todos[index].title = newText;
+          render();
+        };
+        li.appendChild(editBtn);
+
+        let dltBtn = document.createElement("button");
+        dltBtn.setAttribute("class", "delete-button");
+        dltBtn.setAttribute("onclick", "delete()");
+        dltBtn.textContent = "Delete";
+        dltBtn.onclick = () => {
+          todos.splice(index, 1);
+          render();
+        };
+        li.appendChild(dltBtn);
+
+        return li;
+      }
+
+      function render() {
+        document.querySelector("#task-list").innerHTML = "";
+        for (let i = 0; i < todos.length; i++) {
+          const list = createToDoComponent(todos[i].title, i);
+          document.querySelector("#task-list").appendChild(list);
+        }
+      }
+    </script>
+  </body>
+</html>
