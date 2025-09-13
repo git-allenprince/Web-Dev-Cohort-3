@@ -1,0 +1,38 @@
+body{
+    background-color: rgb(231, 234, 237);
+}
+
+#colour-tiles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100vh;
+}
+
+button{
+    width: 10%;
+    height: 10%;
+    border: 1px solid;
+    box-shadow: 2px 4px 6px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    border-radius: 10px;
+}
+
+button:hover {
+    box-shadow: 4px 6px 10px rgba(0,0,0,0.4);
+    transform: translateY(-2px);
+  }
+
+#red{
+    background-color: red;
+}
+#blue{
+    background-color: lightblue;
+}
+#yellow{
+    background-color: yellow;
+}
+#green{
+    background-color: lightgreen;
+}

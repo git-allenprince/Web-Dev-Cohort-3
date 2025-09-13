@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>user info</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+        <h2>User Info:</h2>
+        <div id="userInfo"></div>
+        <button onclick="getUserInformation()">Get Info</button>
+        <button onclick="logout()">Logout</button>
+
+        <script>
+            async function getUserInformation() {
+                try{
+                    const token=localStorage.getItem("token");
+                    const res= await axios.get('http://localhost:3000/me',
+                        {headers:{token:token}}
+                    )
+                    const username=res.data.username;
+                    const password=res.data.password;
+                    document.getElementById("userInfo").innerHTML=`Username: ${username}, Password:${password}`
+                }catch(err){
+                    console.error(err.response?.data || err.message);
+                }
+            }
+
+            function logout(){
+                localStorage.removeItem("token");
+                window.location.href = "index.html";
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="number" id="inp1" />
+    <input type="number" id="inp2" />
+    <div id="result"></div>
+    <button onclick="getData()">Add</button>
+    <script>
+      async function getData() {
+          const a = document.getElementById("inp1").value;
+          const b = document.getElementById("inp2").value;
+        try {
+          const response = await fetch(`http://localhost:3000/${a}/${b}`);
+          const data = await response.json();
+          document.getElementById("result").innerHTML = data.sum;
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    </script>
+  </body>
+</html>
