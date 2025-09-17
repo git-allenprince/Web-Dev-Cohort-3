@@ -9,7 +9,7 @@ router.post("/signUp",signUp);
 router.post("/signIn",signIn);
 router.use(auth)
 router.post("/courses",courses);
-router.post("/editCourse",editCourse);
+router.put("/editCourse/:courseID",editCourse);
 router.get("/getCourses",getCourses);
 
 module.exports = router;

@@ -61,9 +61,8 @@ async function courses(req, res) {
 }
 
 async function editCourse(req, res) {
-    const {courseID} = req.params;
-    const {  title, description, price, imageLink, published } =
-        req.body;
+    const { courseID } = req.params;
+    const { title, description, price, imageLink, published } = req.body;
     try {
         const course = await CourseModel.findOne({ courseID: courseID });
         if (!course)
@@ -77,6 +76,7 @@ async function editCourse(req, res) {
             course.published = published;
             await course.save();
         }
+        res.json({ message: "Course updated successfully.", course: course });
     } catch (error) {
         res.status(401).json({ error: error.message });
     }
