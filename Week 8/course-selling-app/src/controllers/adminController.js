@@ -1,18 +1,10 @@
-const express = require("express");
 const bcrypt = require("bcrypt");
 const { AdminModel } = require("../models/adminDB");
-const { CourseModel } = require("../models/courseDB");
-const auth = require("../middlewares/auth");
+const { CourseModel } = require("../models/coursesDB");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const MONGO_URI = process.env.MONGO_URI;
-
-mongoose.connect(MONGO_URI);
-const app = express();
-
-app.use(express.json());
 
 async function signUp(req, res) {
     const { username, password } = req.body;
@@ -31,13 +23,13 @@ async function signUp(req, res) {
 async function signIn(req, res) {
     const { username, password } = req.body;
     try {
-        const user = AdminModel.findOne({
+        const user = await AdminModel.findOne({
             username: username,
         });
         if (!user)
             return res.status(403).json({ error: "User does not exist" });
         else {
-            const passwordMatch = bcrypt.compare(password, user.password);
+            const passwordMatch = await bcrypt.compare(password, user.password);
             if (!passwordMatch)
                 return res.status(403).json({ error: "Invalid password" });
             else {
@@ -69,7 +61,8 @@ async function courses(req, res) {
 }
 
 async function editCourse(req, res) {
-    const { courseID, title, description, price, imageLink, published } =
+    const {courseID} = req.params;
+    const {  title, description, price, imageLink, published } =
         req.body;
     try {
         const course = await CourseModel.findOne({ courseID: courseID });
@@ -83,9 +76,19 @@ async function editCourse(req, res) {
             course.imageLink = imageLink;
             course.published = published;
             await course.save();
-            
         }
     } catch (error) {
         res.status(401).json({ error: error.message });
     }
 }
+
+async function getCourses(req, res) {
+    try {
+        const courses = await CourseModel.find();
+        res.json({ courses: courses });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+module.exports = { signIn, signUp, courses, editCourse, getCourses };
