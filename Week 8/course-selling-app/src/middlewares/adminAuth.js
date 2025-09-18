@@ -3,14 +3,15 @@ const { AdminModel } = require("../models/adminDB");
 require("dotenv").config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
-async function auth(req, res, next) {
+async function adminAuth(req, res, next) {
     const authHeader = req.headers.authorization;
     const token = authHeader.split(" ")[1];
     try {
         const decodedInfo = jwt.verify(token, JWT_SECRET);
         const user = await AdminModel.findById(decodedInfo.id);
 
-        if (!decodedInfo) return res.status(403).json({ error: "Login again." });
+        if (!decodedInfo)
+            return res.status(403).json({ error: "Login again." });
         else {
             req.user = user;
             next();
@@ -21,4 +22,4 @@ async function auth(req, res, next) {
     }
 }
 
-module.exports = auth;
+module.exports = adminAuth;
